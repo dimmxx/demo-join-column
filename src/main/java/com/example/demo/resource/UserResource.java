@@ -1,8 +1,10 @@
 package com.example.demo.resource;
 
+import com.example.demo.model.Mail;
 import com.example.demo.model.User;
 import com.example.demo.repository.MailRepository;
 import com.example.demo.repository.UserRepository;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,14 +26,15 @@ public class UserResource {
         this.mailRepository = mailRepository;
     }
 
-
-
-
 @GetMapping("/user/{userId}")
 
     public User getUserById(@PathVariable("userId") Long userId) {
+        User user = userRepository.findById(userId).get();
+        List<Mail> mails = mailRepository.getMailByUserId(userId);
+    System.out.println(mails.toString());
+        user.setMails(mails);
 
-        return userRepository.findById(userId).get();
+        return user;
     }
 
 

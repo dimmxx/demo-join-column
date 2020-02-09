@@ -1,7 +1,10 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class User implements Serializable {
@@ -14,9 +17,9 @@ public class User implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "mail_id")
-    private Mail mail;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonBackReference
+    private List<Mail> mails;
 
 
     public User() {
@@ -38,11 +41,11 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public Mail getMail() {
-        return mail;
+    public List<Mail> getMails() {
+        return mails;
     }
 
-    public void setMail(Mail mail) {
-        this.mail = mail;
+    public void setMails(List<Mail> mails) {
+        this.mails = mails;
     }
 }
