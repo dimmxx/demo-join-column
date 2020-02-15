@@ -1,16 +1,18 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -18,8 +20,9 @@ public class User implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<Mail> mails;
+
+    @JsonManagedReference
+    private List<Mail> mails = new ArrayList<>();
 
 
     public User() {
@@ -48,4 +51,5 @@ public class User implements Serializable {
     public void setMails(List<Mail> mails) {
         this.mails = mails;
     }
+
 }

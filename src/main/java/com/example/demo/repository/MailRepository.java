@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface MailRepository extends JpaRepository<Mail, Long> {
 
-    List<Mail> getMailByUserId(Long id);
+    List<Mail> findByUserId(Long UserId);
 
 }
