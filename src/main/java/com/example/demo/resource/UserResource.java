@@ -28,11 +28,9 @@ public class UserResource {
     @GetMapping("/user/{userId}")
     public User getUserById(@PathVariable("userId") Long userId) {
         User user = userRepository.findById(userId).get();
-        List<Mail> list = mailRepository.findByUserId(userId);
-        list.forEach(element -> System.out.println(element));
-        user.setMails(list);
-
-
+        //List<Mail> list = mailRepository.findByUserId(userId);
+        //list.forEach(element -> System.out.println(element));
+        //user.setMails(list);
         return user;
     }
 

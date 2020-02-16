@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Mail implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -21,8 +21,6 @@ public class Mail implements Serializable {
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
-
-
 
     public Mail() {
     }
